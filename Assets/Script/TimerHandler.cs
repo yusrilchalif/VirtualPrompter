@@ -27,7 +27,7 @@ public class TimerHandler : MonoBehaviour
 
             if(timeRemaining <= 0)
             {
-                print("time out");
+                //print("time out");
                 ChangeColorText(timeupColor);
             }
 

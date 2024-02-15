@@ -3,35 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class TextNewsSpeedController : MonoBehaviour
 {
-    public TextMeshProUGUI karaokeText;
-    public Color[] colors; // Array warna yang akan digunakan
-    public float colorChangeSpeed = 1.0f;
+    public float duration = 2.0f;
+    public float targetY = -200.0f;
+    public float initialY = -400.0f; // Tambahkan variabel untuk posisi awal
+    public Button speedUpButton;
+    public Button slowDownButton;
 
-    private int currentColorIndex = 0;
-    private float colorChangeTimer = 0.0f;
-
-    void Start()
+    private void Start()
     {
-        SetNextColor();
+        StartAppearAnimation();
+
+        // Menambahkan listener untuk tombol mempercepat
+        speedUpButton.onClick.AddListener(SpeedUpAnimation);
+
+        // Menambahkan listener untuk tombol memperlambat
+        slowDownButton.onClick.AddListener(SlowDownAnimation);
     }
 
-    void Update()
+    void StartAppearAnimation()
     {
-        colorChangeTimer += Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, initialY, transform.position.z); // Set posisi awal
 
-        if (colorChangeTimer >= 1.0f / colorChangeSpeed)
-        {
-            SetNextColor();
-            colorChangeTimer = 0.0f;
-        }
+        // Menggunakan DoTween untuk menganimasikan pergerakan dari bawah ke atas
+        transform.DOMoveY(targetY, duration)
+            .SetEase(Ease.OutFlash) // Anda dapat mengganti Ease sesuai keinginan
+            .OnComplete(AnimationComplete); // Panggil method ini saat animasi selesai
     }
 
-    void SetNextColor()
+    void AnimationComplete()
     {
-        karaokeText.color = colors[currentColorIndex];
-        currentColorIndex = (currentColorIndex + 1) % colors.Length;
+        // Method yang dipanggil saat animasi selesai
+        Debug.Log("Animasi selesai!");
+    }
+
+    // Method untuk mempercepat animasi
+    void SpeedUpAnimation()
+    {
+        duration /= 2.0f; // Misalnya, mengurangi durasi menjadi setengah dari sebelumnya
+        StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
+    }
+
+    // Method untuk memperlambat animasi
+    void SlowDownAnimation()
+    {
+        duration *= 2.0f; // Misalnya, meningkatkan durasi menjadi dua kali lipat dari sebelumnya
+        StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
     }
 }
