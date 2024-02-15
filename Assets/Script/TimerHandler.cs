@@ -21,25 +21,6 @@ public class TimerHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(isRun)
-        //{
-        //    if(timeRemaining > 0)
-        //    {
-        //        timeRemaining -= Time.deltaTime;
-        //        DisplayTimer(timeRemaining);
-        //    }
-        //    else
-        //    {
-        //        print("time has run out");
-        //        //timeRemaining = 0;
-        //        DisplayTimer(0);
-
-        //        //isRun = false;
-
-        //        ChangeColorText(timeupColor);
-        //    }
-        //}
-
         if(isRun)
         {
             timeRemaining -= Time.deltaTime;
