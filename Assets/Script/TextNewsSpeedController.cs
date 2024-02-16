@@ -12,6 +12,7 @@ public class TextNewsSpeedController : MonoBehaviour
     public float initialY = -400.0f; // Tambahkan variabel untuk posisi awal
     public Button speedUpButton;
     public Button slowDownButton;
+    public Button endButton;
 
     private void Start()
     {
@@ -22,6 +23,8 @@ public class TextNewsSpeedController : MonoBehaviour
 
         // Menambahkan listener untuk tombol memperlambat
         slowDownButton.onClick.AddListener(SlowDownAnimation);
+
+        //endButton.onClick.AddListener()
     }
 
     void StartAppearAnimation()
