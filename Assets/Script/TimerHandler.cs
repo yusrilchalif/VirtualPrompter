@@ -34,8 +34,6 @@ public class TimerHandler : MonoBehaviour
             {
                 //print("time out");
                 ChangeColorText(timeupColor);
-
-                DecreaseScore();
             }
             
             DisplayTimer(timeRemaining);
@@ -55,7 +53,7 @@ public class TimerHandler : MonoBehaviour
 
         if (Mathf.FloorToInt(timeToDisplay) != Mathf.FloorToInt(lastSecond))
         {
-            DecreaseScore();
+            DecreaseScore(scoreDecrease);
             lastSecond = timeToDisplay;
         }
     }
@@ -65,16 +63,16 @@ public class TimerHandler : MonoBehaviour
         timerText.color = color;
     }
 
-    void DecreaseScore()
+    void DecreaseScore(int value)
     {
         if(timeRemaining <= 0)
         {
             // Kurangi skor sebanyak scoreDecreaseRate setiap detik
-            int decreaseAmount = Mathf.CeilToInt(scoreDecrease * Time.deltaTime);
+            int decreaseAmount = Mathf.CeilToInt(value * Time.deltaTime);
             score = Mathf.Max(score - decreaseAmount, 0); // Pastikan skor tidak kurang dari 0
 
             // text score
-            scoreText.text = score.ToString();
+            scoreText.text = "Score: " + score.ToString();
 
             // Tampilkan skor atau lakukan operasi lain yang diperlukan
             Debug.Log("Current Score: " + score);
