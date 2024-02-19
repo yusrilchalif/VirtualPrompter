@@ -48,6 +48,8 @@ public class TextNewsSpeedController : MonoBehaviour
     {
         duration /= 2.0f; // Misalnya, mengurangi durasi menjadi setengah dari sebelumnya
         StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
+
+        print("Speed+: " + duration.ToString());
     }
 
     // Method untuk memperlambat animasi
@@ -55,5 +57,7 @@ public class TextNewsSpeedController : MonoBehaviour
     {
         duration *= 2.0f; // Misalnya, meningkatkan durasi menjadi dua kali lipat dari sebelumnya
         StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
+
+        print("Speed-: " + duration.ToString());
     }
 }

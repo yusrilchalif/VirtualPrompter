@@ -9,11 +9,11 @@ public class TimerHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float timeRemaining = 300f;
     [SerializeField] Color timeupColor = Color.red;
-    [SerializeField] int scoreDecrease = 5;
     [SerializeField] TextMeshProUGUI scoreText;
 
     public bool isRun = false;
     public int score = 100;
+    public int scoreDecrease = 5;
 
     private float lastSecond = 0f;
 
@@ -68,7 +68,7 @@ public class TimerHandler : MonoBehaviour
         if(timeRemaining <= 0)
         {
             // Kurangi skor sebanyak scoreDecreaseRate setiap detik
-            int decreaseAmount = Mathf.CeilToInt(value * Time.deltaTime);
+            int decreaseAmount = Mathf.CeilToInt(value * Mathf.Abs(Time.deltaTime));
             score = Mathf.Max(score - decreaseAmount, 0); // Pastikan skor tidak kurang dari 0
 
             // text score
