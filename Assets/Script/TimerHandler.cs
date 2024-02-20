@@ -9,11 +9,11 @@ public class TimerHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float timeRemaining = 300f;
     [SerializeField] Color timeupColor = Color.red;
+    [SerializeField] int scoreDecrease = 5;
     [SerializeField] TextMeshProUGUI scoreText;
 
     public bool isRun = false;
     public int score = 100;
-    public int scoreDecrease = 5;
 
     private float lastSecond = 0f;
 
@@ -21,21 +21,23 @@ public class TimerHandler : MonoBehaviour
     void Start()
     {
         isRun = true;
+
+        // Mulai memanggil DecreaseScore setiap detik
+        InvokeRepeating("DecreaseScore", 0f, 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isRun)
+        if (isRun)
         {
             timeRemaining -= Time.deltaTime;
 
-            if(timeRemaining <= 0)
+            if (timeRemaining <= 0)
             {
-                //print("time out");
                 ChangeColorText(timeupColor);
             }
-            
+
             DisplayTimer(timeRemaining);
         }
     }
@@ -53,7 +55,6 @@ public class TimerHandler : MonoBehaviour
 
         if (Mathf.FloorToInt(timeToDisplay) != Mathf.FloorToInt(lastSecond))
         {
-            DecreaseScore(scoreDecrease);
             lastSecond = timeToDisplay;
         }
     }
@@ -63,19 +64,18 @@ public class TimerHandler : MonoBehaviour
         timerText.color = color;
     }
 
-    void DecreaseScore(int value)
+    void DecreaseScore()
     {
-        if(timeRemaining <= 0)
+        if (timeRemaining <= 0)
         {
-            // Kurangi skor sebanyak scoreDecreaseRate setiap detik
-            int decreaseAmount = Mathf.CeilToInt(value * Mathf.Abs(Time.deltaTime));
-            score = Mathf.Max(score - decreaseAmount, 0); // Pastikan skor tidak kurang dari 0
+            // Kurangi skor sebanyak scoreDecrease setiap detik
+            score = Mathf.Max(score - scoreDecrease, 0); // Pastikan skor tidak kurang dari 0
 
-            // text score
-            scoreText.text = "Score: " + score.ToString();
+            // Teks skor
+            scoreText.text = "Skor: " + score.ToString();
 
-            // Tampilkan skor atau lakukan operasi lain yang diperlukan
-            Debug.Log("Current Score: " + score);
+            // Debug untuk memantau nilai-nilai
+            Debug.Log("Skor Saat Ini: " + score);
         }
     }
 }

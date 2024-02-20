@@ -1525,10 +1525,10 @@ MonoBehaviour:
   timerText: {fileID: 702927468}
   timeRemaining: 10
   timeupColor: {r: 1, g: 0, b: 0, a: 1}
+  scoreDecrease: 5
   scoreText: {fileID: 1145715720}
   isRun: 0
   score: 100
-  scoreDecrease: 5
 --- !u!1 &1510378332
 GameObject:
   m_ObjectHideFlags: 0
