@@ -1203,8 +1203,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.129517, y: -195}
-  m_SizeDelta: {x: -64.2828, y: -364.2476}
+  m_AnchoredPosition: {x: -8.129517, y: -910.43207}
+  m_SizeDelta: {x: -64.2828, y: 1066.6167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991117916
 MonoBehaviour:
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -825.0556}
+  m_margin: {x: 0, y: 0, z: 0, w: 9.972961}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 200
   targetY: 1500
-  initialY: -200
+  initialY: -950
   speedUpButton: {fileID: 118475602}
   slowDownButton: {fileID: 2145229159}
   endButton: {fileID: 0}
