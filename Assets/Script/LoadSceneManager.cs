@@ -9,7 +9,7 @@ public class LoadSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance == null)
             instance = this;
     }
 
@@ -27,6 +27,6 @@ public class LoadSceneManager : MonoBehaviour
 
     public void GoToTestScene()
     {
-        SceneManager.LoadScene("Test Scene");
+        SceneManager.LoadScene(1);
     }
 }
