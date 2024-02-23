@@ -11,19 +11,27 @@ public class TimerHandler : MonoBehaviour
     [SerializeField] Color timeupColor = Color.red;
     [SerializeField] int scoreDecrease = 5;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] Button startButton;
+    [SerializeField] GameObject newsCanvas;
 
     public bool isRun = false;
     public int score = 100;
+    public TextNewsSpeedController speedController;
 
     private float lastSecond = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        isRun = true;
+
+        startButton.onClick.AddListener(StartGame);
 
         // Mulai memanggil DecreaseScore setiap detik
         InvokeRepeating("DecreaseScore", 0f, 1f);
+
+        newsCanvas.gameObject.SetActive(false);
+
+        
     }
 
     // Update is called once per frame
@@ -66,7 +74,7 @@ public class TimerHandler : MonoBehaviour
 
     void DecreaseScore()
     {
-        if (timeRemaining <= 0)
+        if (isRun & timeRemaining <= 0)
         {
             // Kurangi skor sebanyak scoreDecrease setiap detik
             score = Mathf.Max(score - scoreDecrease, 0); // Pastikan skor tidak kurang dari 0
@@ -76,6 +84,19 @@ public class TimerHandler : MonoBehaviour
 
             // Debug untuk memantau nilai-nilai
             Debug.Log("Skor Saat Ini: " + score);
+        }
+    }
+
+    public void StartGame()
+    {
+        isRun = true;
+
+        startButton.gameObject.SetActive(false);
+        newsCanvas.gameObject.SetActive(true);
+
+        if (speedController != null)
+        {
+            speedController.StartAppearAnimation();
         }
     }
 }

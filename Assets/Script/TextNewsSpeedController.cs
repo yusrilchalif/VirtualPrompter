@@ -14,9 +14,11 @@ public class TextNewsSpeedController : MonoBehaviour
     public Button slowDownButton;
     public Button endButton;
 
+    private bool canAnimate = false; // Variabel untuk mengecek apakah animasi dapat dimainkan
+
     private void Start()
     {
-        StartAppearAnimation();
+        //startButton.onClick.AddListener(StartGame);
 
         // Menambahkan listener untuk tombol mempercepat
         speedUpButton.onClick.AddListener(SpeedUpAnimation);
@@ -27,7 +29,7 @@ public class TextNewsSpeedController : MonoBehaviour
         //endButton.onClick.AddListener()
     }
 
-    void StartAppearAnimation()
+    public void StartAppearAnimation()
     {
         transform.position = new Vector3(transform.position.x, initialY, transform.position.z); // Set posisi awal
 
@@ -46,18 +48,30 @@ public class TextNewsSpeedController : MonoBehaviour
     // Method untuk mempercepat animasi
     void SpeedUpAnimation()
     {
-        duration /= 2.0f; // Misalnya, mengurangi durasi menjadi setengah dari sebelumnya
-        StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
+        if (canAnimate)
+        {
+            duration /= 2.0f; // Misalnya, mengurangi durasi menjadi setengah dari sebelumnya
+            StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
 
-        print("Speed+: " + duration.ToString());
+            print("Speed+: " + duration.ToString());
+        }
     }
 
     // Method untuk memperlambat animasi
     void SlowDownAnimation()
     {
-        duration *= 2.0f; // Misalnya, meningkatkan durasi menjadi dua kali lipat dari sebelumnya
-        StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
+        if (canAnimate)
+        {
+            duration *= 2.0f; // Misalnya, meningkatkan durasi menjadi dua kali lipat dari sebelumnya
+            StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
 
-        print("Speed-: " + duration.ToString());
+            print("Speed-: " + duration.ToString());
+        }
+    }
+
+    // Method untuk mengaktifkan animasi
+    public void EnableAnimation()
+    {
+        canAnimate = true;
     }
 }
