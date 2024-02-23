@@ -31,12 +31,11 @@ public class TextNewsSpeedController : MonoBehaviour
 
     public void StartAppearAnimation()
     {
-        transform.position = new Vector3(transform.position.x, initialY, transform.position.z); // Set posisi awal
-
-        // Menggunakan DoTween untuk menganimasikan pergerakan dari bawah ke atas
+        Debug.Log("StartAppearAnimation called");
+        transform.position = new Vector3(transform.position.x, initialY, transform.position.z);
         transform.DOMoveY(targetY, duration)
-            .SetEase(Ease.OutFlash) // Anda dapat mengganti Ease sesuai keinginan
-            .OnComplete(AnimationComplete); // Panggil method ini saat animasi selesai
+            .SetEase(Ease.OutFlash)
+            .OnComplete(AnimationComplete);
     }
 
     void AnimationComplete()
@@ -48,18 +47,19 @@ public class TextNewsSpeedController : MonoBehaviour
     // Method untuk mempercepat animasi
     void SpeedUpAnimation()
     {
+        Debug.Log("SpeedUpAnimation called");
         if (canAnimate)
         {
-            duration /= 2.0f; // Misalnya, mengurangi durasi menjadi setengah dari sebelumnya
-            StartAppearAnimation(); // Mulai ulang animasi dengan durasi baru
-
-            print("Speed+: " + duration.ToString());
+            duration /= 2.0f;
+            Debug.Log("Speed+: " + duration.ToString());
+            StartAppearAnimation();
         }
     }
 
     // Method untuk memperlambat animasi
     void SlowDownAnimation()
     {
+        Debug.Log("AJAJJA");
         if (canAnimate)
         {
             duration *= 2.0f; // Misalnya, meningkatkan durasi menjadi dua kali lipat dari sebelumnya

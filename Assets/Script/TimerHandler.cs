@@ -97,6 +97,7 @@ public class TimerHandler : MonoBehaviour
         if (speedController != null)
         {
             speedController.StartAppearAnimation();
+            speedController.EnableAnimation();
         }
     }
 }
