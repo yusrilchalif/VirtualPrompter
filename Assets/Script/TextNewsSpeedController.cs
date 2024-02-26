@@ -15,6 +15,8 @@ public class TextNewsSpeedController : MonoBehaviour
     public Button endButton;
 
     private bool canAnimate = false; // Variabel untuk mengecek apakah animasi dapat dimainkan
+    private Tween currentTween;
+    private float currentTweenPosition;
 
     private void Start()
     {
@@ -32,9 +34,14 @@ public class TextNewsSpeedController : MonoBehaviour
     public void StartAppearAnimation()
     {
         Debug.Log("StartAppearAnimation called");
+
+        // Menyimpan posisi awal
         transform.position = new Vector3(transform.position.x, initialY, transform.position.z);
-        transform.DOMoveY(targetY, duration)
+
+        // Memulai animasi dengan Tween
+        currentTween = transform.DOMoveY(targetY, duration)
             .SetEase(Ease.OutFlash)
+            .OnUpdate(() => currentTweenPosition = transform.position.y) // Menyimpan posisi Tween saat ini
             .OnComplete(AnimationComplete);
     }
 
@@ -73,5 +80,17 @@ public class TextNewsSpeedController : MonoBehaviour
     public void EnableAnimation()
     {
         canAnimate = true;
+    }
+
+    public void StopAnimation()
+    {
+        print("Stop animation");
+
+        if(canAnimate && currentTween != null)
+        {
+            currentTween.Kill();
+            transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+            canAnimate = false;
+        }
     }
 }

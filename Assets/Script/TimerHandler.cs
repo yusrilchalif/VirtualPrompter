@@ -11,8 +11,11 @@ public class TimerHandler : MonoBehaviour
     [SerializeField] Color timeupColor = Color.red;
     [SerializeField] int scoreDecrease = 5;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI finalScore;
     [SerializeField] Button startButton;
+    [SerializeField] Button endButton;
     [SerializeField] GameObject newsCanvas;
+    [SerializeField] GameObject scoreCanvas;
 
     public bool isRun = false;
     public int score = 100;
@@ -25,13 +28,14 @@ public class TimerHandler : MonoBehaviour
     {
 
         startButton.onClick.AddListener(StartGame);
+        endButton.onClick.AddListener(EndGame);
 
         // Mulai memanggil DecreaseScore setiap detik
         InvokeRepeating("DecreaseScore", 0f, 1f);
 
         newsCanvas.gameObject.SetActive(false);
+        scoreCanvas.gameObject.SetActive(false);
 
-        
     }
 
     // Update is called once per frame
@@ -99,5 +103,16 @@ public class TimerHandler : MonoBehaviour
             speedController.StartAppearAnimation();
             speedController.EnableAnimation();
         }
+    }
+
+    public void EndGame()
+    {
+        isRun = false;
+
+        if (speedController != null)
+            speedController.StopAnimation();
+
+        scoreCanvas.gameObject.SetActive(true);
+        finalScore.text = "Score: " + score.ToString();
     }
 }
