@@ -113,6 +113,7 @@ public class TimerHandler : MonoBehaviour
             speedController.StopAnimation();
 
         scoreCanvas.gameObject.SetActive(true);
+        newsCanvas.gameObject.SetActive(false);
         finalScore.text = "Score: " + score.ToString();
     }
 }
